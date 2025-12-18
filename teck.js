@@ -90,3 +90,56 @@ emailInput.addEventListener('input', function() {
 });
 
 continueBtn.disabled = !emailInput.value.trim();
+
+// ============================================
+// PASSKEY MODAL FUNCTIONS (NEW)
+// ============================================
+
+// Get all passkey buttons
+const passkeyButtons = document.querySelectorAll('.passkey-btn');
+
+// Add click event listeners to all passkey buttons
+passkeyButtons.forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        showPasskeyModal();
+    });
+});
+
+function showPasskeyModal() {
+    const modal = document.getElementById('passkeyModal');
+    if (!modal) {
+        console.error('Passkey modal not found');
+        return;
+    }
+    
+    modal.classList.add('show');
+    
+    // Simulate passkey authentication process
+    setTimeout(() => {
+        const step1 = document.getElementById('step1');
+        if (step1) {
+            step1.classList.add('completed');
+        }
+        const step2 = document.getElementById('step2');
+        if (step2) {
+            step2.classList.add('active');
+        }
+    }, 1500);
+
+    setTimeout(() => {
+        const step2 = document.getElementById('step2');
+        if (step2) {
+            step2.classList.add('completed');
+        }
+        const step3 = document.getElementById('step3');
+        if (step3) {
+            step3.classList.add('active');
+        }
+    }, 3000);
+
+    // Redirect to dashboard after authentication
+    setTimeout(() => {
+        window.location.href = './dashboard.html';
+    }, 4500);
+}
