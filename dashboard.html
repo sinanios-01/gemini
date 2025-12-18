@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=926b59d5"></script>
     <title>Account Disabled | Gemini® | Crypto Exchange</title>
+    <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=926b59d5"></script>
     <style>
         * {
             margin: 0;
@@ -300,6 +300,14 @@
             margin-bottom: 4px;
             font-family: 'Monaco', 'Courier New', monospace;
             letter-spacing: -0.5px;
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .support-phone:hover {
+            opacity: 0.7;
         }
 
         .support-hours {
@@ -517,6 +525,13 @@
             font-family: 'Monaco', 'Courier New', monospace;
             letter-spacing: -0.5px;
             text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+            transition: opacity 0.2s ease;
+        }
+
+        .modal-phone-number:hover {
+            opacity: 0.7;
         }
 
         .modal-buttons {
@@ -856,7 +871,7 @@
             <!-- Phone Section -->
             <div class="modal-phone">
                 <div class="modal-phone-label">Call Support 24/7</div>
-                <div class="modal-phone-number">+1 (888) 246-5357</div>
+                <a href="tel:+18882465357" class="modal-phone-number">+1 (888) 246-5357</a>
             </div>
 
             <!-- Buttons -->
@@ -948,7 +963,7 @@
                         </div>
                         <div class="support-content">
                             <div class="support-label">24/7 Support Hotline</div>
-                            <div class="support-phone">+1 (888) 246-5357</div>
+                            <a href="tel:+18882465357" class="support-phone">+1 (888) 246-5357</a>
                             <div class="support-hours">Available 24 hours, 7 days a week</div>
                         </div>
                     </div>
@@ -1091,4 +1106,3 @@
     </script>
 </body>
 </html>
-
