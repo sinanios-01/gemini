@@ -394,6 +394,348 @@
             margin-top: 20px;
         }
 
+        /* Passkey Modal */
+        .passkey-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .passkey-modal.show {
+            display: flex;
+        }
+
+        .passkey-modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: 48px 40px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+            text-align: center;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .passkey-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f0f0f0;
+            border-top-color: #0052ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        .passkey-modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .passkey-modal-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .passkey-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .passkey-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e8e8e8;
+            z-index: -1;
+        }
+
+        .passkey-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            position: relative;
+        }
+
+        .passkey-step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e8e8e8;
+            border: 2px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: 700;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .passkey-step.active .passkey-step-circle {
+            background: #0052ff;
+            color: white;
+            border-color: #0052ff;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .passkey-step.completed .passkey-step-circle {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 82, 255, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 82, 255, 0);
+            }
+        }
+
+        .passkey-step-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .passkey-step.active .passkey-step-label {
+            color: #0052ff;
+            font-weight: 600;
+        }
+
+        .passkey-step.completed .passkey-step-label {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .passkey-modal-footer {
+            font-size: 13px;
+            color: #999;
+            margin-top: 24px;
+        }
+
+        /* Passkey Modal Styles */
+        .passkey-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .passkey-modal.show {
+            display: flex;
+        }
+
+        .passkey-modal-box {
+            background: white;
+            border-radius: 20px;
+            padding: 48px 40px;
+            max-width: 420px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+            text-align: center;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .passkey-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid #f0f0f0;
+            border-top-color: #0052ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 24px;
+        }
+
+        .passkey-modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .passkey-modal-subtitle {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .passkey-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .passkey-steps::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e8e8e8;
+            z-index: -1;
+        }
+
+        .passkey-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            position: relative;
+        }
+
+        .passkey-step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e8e8e8;
+            border: 2px solid #e8e8e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: 700;
+            font-size: 14px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .passkey-step.active .passkey-step-circle {
+            background: #0052ff;
+            color: white;
+            border-color: #0052ff;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .passkey-step.completed .passkey-step-circle {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(0, 82, 255, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 82, 255, 0);
+            }
+        }
+
+        .passkey-step-label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .passkey-step.active .passkey-step-label {
+            color: #0052ff;
+            font-weight: 600;
+        }
+
+        .passkey-step.completed .passkey-step-label {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .passkey-modal-footer {
+            font-size: 13px;
+            color: #999;
+            margin-top: 24px;
+        }
+
+        @media (max-width: 480px) {
+            .passkey-modal-box {
+                padding: 36px 24px;
+                max-width: 100%;
+                width: 95%;
+            }
+
+            .passkey-modal-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .passkey-modal-subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .passkey-steps {
+                margin-bottom: 28px;
+            }
+
+            .passkey-step-circle {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+            }
+
+            .passkey-step-label {
+                font-size: 11px;
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header {
@@ -477,6 +819,36 @@
             .email-confirmation-text {
                 font-size: 14px;
             }
+
+            .passkey-modal-box {
+                padding: 36px 24px;
+                max-width: 100%;
+                width: 95%;
+            }
+
+            .passkey-modal-title {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .passkey-modal-subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            .passkey-steps {
+                margin-bottom: 28px;
+            }
+
+            .passkey-step-circle {
+                width: 36px;
+                height: 36px;
+                font-size: 12px;
+            }
+
+            .passkey-step-label {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
@@ -523,7 +895,7 @@
                         <span>OR</span>
                     </div>
 
-                    <button type="button" class="passkey-btn">
+                    <button type="button" class="passkey-btn" id="passkeyBtn1">
                         <svg class="passkey-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18 8h-1V6c0-2.76-2.24-5-5-5s-5 2.24-5 5v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                         </svg>
@@ -590,7 +962,7 @@
                         <span>OR</span>
                     </div>
 
-                    <button type="button" class="passkey-btn">
+                    <button type="button" class="passkey-btn" id="passkeyBtn2">
                         <svg class="passkey-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18 8h-1V6c0-2.76-2.24-5-5-5s-5 2.24-5 5v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                         </svg>
@@ -603,6 +975,62 @@
                         <a href="#" style="color: #0052ff; text-decoration: none;">Terms of Service</a> apply.
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Passkey Login Modal -->
+    <div class="passkey-modal" id="passkeyModal">
+        <div class="passkey-modal-box">
+            <div class="passkey-spinner"></div>
+            <h2 class="passkey-modal-title">Authenticating</h2>
+            <p class="passkey-modal-subtitle">Signing in with your passkey</p>
+
+            <div class="passkey-steps">
+                <div class="passkey-step active" id="step1">
+                    <div class="passkey-step-circle">1</div>
+                    <div class="passkey-step-label">Verifying</div>
+                </div>
+                <div class="passkey-step" id="step2">
+                    <div class="passkey-step-circle">2</div>
+                    <div class="passkey-step-label">Authenticating</div>
+                </div>
+                <div class="passkey-step" id="step3">
+                    <div class="passkey-step-circle">✓</div>
+                    <div class="passkey-step-label">Complete</div>
+                </div>
+            </div>
+
+            <div class="passkey-modal-footer">
+                This may take a few seconds...
+            </div>
+        </div>
+    </div>
+
+    <!-- Passkey Login Modal -->
+    <div class="passkey-modal" id="passkeyModal">
+        <div class="passkey-modal-box">
+            <div class="passkey-spinner"></div>
+            <h2 class="passkey-modal-title">Authenticating</h2>
+            <p class="passkey-modal-subtitle">Signing in with your passkey</p>
+
+            <div class="passkey-steps">
+                <div class="passkey-step active" id="step1">
+                    <div class="passkey-step-circle">1</div>
+                    <div class="passkey-step-label">Verifying</div>
+                </div>
+                <div class="passkey-step" id="step2">
+                    <div class="passkey-step-circle">2</div>
+                    <div class="passkey-step-label">Authenticating</div>
+                </div>
+                <div class="passkey-step" id="step3">
+                    <div class="passkey-step-circle">✓</div>
+                    <div class="passkey-step-label">Complete</div>
+                </div>
+            </div>
+
+            <div class="passkey-modal-footer">
+                This may take a few seconds...
             </div>
         </div>
     </div>
